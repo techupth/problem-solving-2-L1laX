@@ -2,6 +2,19 @@
 
 const fizzBuzz = function (n) {
   //Start coding here
+  let display = [];
+  for (let i = 1; i <= n; i++) {
+    if (i % 3 === 0 && i % 15 !== 0) {
+      display.push("Fizz");
+    } else if (i % 5 === 0 && i % 15 !== 0) {
+      display.push("Buzz");
+    } else if (i % 15 === 0) {
+      display.push("FizzBuzz");
+    } else {
+      display.push(`${i}`);
+    }
+  }
+  return display;
 };
 
 const result1 = fizzBuzz(3);

@@ -1,8 +1,8 @@
 //Exercise 1: Roman to Integer
-
 const romanToInt = function (s) {
   //Start coding here
   let arrStr = s.split("");
+
   let arrNum = arrStr.map((str) => {
     if (str === "I") {
       return 1;
@@ -20,19 +20,39 @@ const romanToInt = function (s) {
       return 1000;
     }
   });
-  let result = arrNum.reduce((acc, crr, index, arr) => {
-    if (arr[index] < arr[index + 1]) {
-      return (acc -= crr);
+  let arrValid = arrNum.map((crr, index, arry) => {
+    if (arry[index] < arry[index + 1]) {
+      if (
+        arry[index] - arry[index + 1] === -4 ||
+        arry[index] - arry[index + 1] === -9 ||
+        arry[index] - arry[index + 1] === -40 ||
+        arry[index] - arry[index + 1] === -90 ||
+        arry[index] - arry[index + 1] === -400 ||
+        arry[index] - arry[index + 1] === -900
+      ) {
+        return crr;
+      } else {
+        return "ERROR";
+      }
     } else {
-      return (acc += crr);
+      return crr;
     }
-  }, 0);
-  console.log(arrStr);
-  console.log(arrNum);
-  console.log(result);
-  return result;
+  });
+  if (arrValid.includes("ERROR")) {
+    return "ERROR Wrong Format";
+  } else {
+    let result = arrValid.reduce((acc, crr, index, arr) => {
+      if (arr[index] < arr[index + 1]) {
+        return (acc -= crr);
+      } else {
+        return (acc += crr);
+      }
+    }, 0);
+    return result;
+  }
 };
 
-const result1 = romanToInt("III"); // 3
-const result2 = romanToInt("LVIII"); // 58
+//const result1 = romanToInt("III"); // 3
+//const result2 = romanToInt("LVIII"); // 58
 const result3 = romanToInt("MCMXCIV"); //1994
+const result9 = romanToInt("IM");
